@@ -1,8 +1,13 @@
 language: cpp
 before_script:
 - sudo apt update
-- sudo apt install libboost-test-dev -y
+- sudo apt install libboost-test-dev libgtest-dev cmake -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
+- cd usr/src/gtest
+- sudo cmake .
+- sudo cmake --build .
+- sudo cp *.a /usr/lib
+- cd ${TRAVIS_BUILD_DIR}
 - sudo apt update
 script:
 - cmake .
