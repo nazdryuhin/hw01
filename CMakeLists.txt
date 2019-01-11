@@ -14,7 +14,9 @@ add_library(helloworld lib.cpp)
 
 add_executable(test_version test_version.cpp)
 
-set_target_properties(helloworld_cli helloworld test_version PROPERTIES
+add_executable(gtest_version gtest_version.cpp)
+
+set_target_properties(helloworld_cli helloworld test_version gtest_version PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
@@ -31,6 +33,12 @@ target_link_libraries(helloworld_cli
 
 target_link_libraries(test_version
     ${Boost_LIBRARIES}
+    helloworld
+)
+
+target_link_libraries(gtest_version 
+    GTest::GTest
+    GTest::Main
     helloworld
 )
 
